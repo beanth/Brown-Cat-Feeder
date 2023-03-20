@@ -1,5 +1,2 @@
-opencv-python-headless
-cmake
-build-essential
-pkg-config
+opencv-contrib-python-headless
 picamera[array]
