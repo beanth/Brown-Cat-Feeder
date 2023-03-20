@@ -2,6 +2,9 @@
  Allows a Raspberry Pi 4 to detect a brown cat using OpenCV and reveal a food bowl.  
 Looks for certain colors only present in my cat's coat so that my roommates' cat doesn't eat all of her food.
 
+## How to install
+Run `pip install -r requirements.txt` in root of repo.
+
 ## How it works
 First, the Pi detects the presence of a cat using limit switches in a platform.  
 Then, it turns on an array of white LEDs in order to allow the camera to see the color of the cat better.  
