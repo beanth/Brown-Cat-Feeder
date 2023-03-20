@@ -1,4 +1,6 @@
-pip setuptools wheel
+pip
+setuptools
+wheel
 opencv-python
 cmake
 build-essential
