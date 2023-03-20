@@ -1,9 +1,9 @@
-# Brown-Cat-Feeder
+# Automatic-Cat-Feeder
  Allows a Raspberry Pi 4 to detect a brown cat using OpenCV and reveal a food bowl.  
 Looks for certain colors only present in my cat's coat so that my roommates' cat doesn't eat all of her food.
 
 ## How to install
-Run `pip install -r requirements.txt` in root of repo.
+Run `pip install --upgrade pip setuptools wheel` first and then `pip install -r requirements.txt` in root of repo.
 
 ## How it works
 First, the Pi detects the presence of a cat using limit switches in a platform.  

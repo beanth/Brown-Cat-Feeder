@@ -1,7 +1,5 @@
-pip
-setuptools
-wheel
-opencv-python
+opencv-python-headless
 cmake
 build-essential
 pkg-config
+picamera[array]
