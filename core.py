@@ -16,6 +16,8 @@ GPIO.setup(LED_PIN, GPIO.OUT)
 GPIO.setup(MOTOR_PIN, GPIO.OUT)
 GPIO.setup(SWITCH_PIN, GPIO.IN)
 
+upper_color_bound = numpy.array([30, 154, 154])
+
 while True:
     if GPIO.input(SWITCH_PIN):
         print("ACTIVATED")
@@ -31,7 +33,7 @@ while True:
                 for frame in cam.capture_continuous(feed, format="bgr", use_video_port=True):
                     image = frame.array
                     cv2.imshow("Frame", image)
-                    # clear the stream in preparation for the next frame
+                    # clear stream
                     feed.truncate(0)
         except:
             print("CAMERA NOT CONNECTED PROPERLY/ENABLED")
