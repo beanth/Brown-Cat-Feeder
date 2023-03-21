@@ -4,6 +4,7 @@ import RPi.GPIO as GPIO
 import cv2
 import time
 
+GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 
 # PIN CONSTANTS

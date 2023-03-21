@@ -3,7 +3,7 @@
 Looks for certain colors only present in my cat's coat so that my roommates' cat doesn't eat all of her food.
 
 ## How to install
-Run `pip install --upgrade pip setuptools wheel numpy` first and then `pip install -r requirements.txt` in root of repo.
+Run `pip install --upgrade pip setuptools wheel numpy` first, and then `apt-get install libhdf5-dev libhdf5-serial-dev libatlas3-base libjasper-dev libqtgui4 libqt4-test`. Finally, run `pip install -r requirements.txt` in root of repo.
 
 ## How it works
 First, the Pi detects the presence of a cat using limit switches in a platform.  
