@@ -18,18 +18,23 @@ GPIO.setup(SWITCH_PIN, GPIO.IN)
 
 while True:
     if GPIO.input(SWITCH_PIN):
+        print("ACTIVATED")
         GPIO.output(LED_PIN, GPIO.HIGH)
-        with PiCamera() as cam:
-            cam.resolution = (640, 480)
-            cam.framerate = 32
-            feed = PiRGBArray(cam, size = (640, 480))
-            time.sleep(1)
-
-            for frame in cam.capture_continuous(feed, format="bgr", use_video_port=True):
-                image = frame.array
-                cv2.imshow("Frame", image)
-                # clear the stream in preparation for the next frame
-                feed.truncate(0)
+        
+        try:
+            with PiCamera() as cam:
+                cam.resolution = (1920, 1080)
+                cam.framerate = 30
+                feed = PiRGBArray(cam, size = (1920, 1080))
+                time.sleep(1)
+                
+                for frame in cam.capture_continuous(feed, format="bgr", use_video_port=True):
+                    image = frame.array
+                    cv2.imshow("Frame", image)
+                    # clear the stream in preparation for the next frame
+                    feed.truncate(0)
+        except:
+            print("CAMERA NOT CONNECTED PROPERLY/ENABLED")
 
 
     GPIO.output(LED_PIN, GPIO.LOW)
