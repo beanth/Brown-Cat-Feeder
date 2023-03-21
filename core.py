@@ -3,6 +3,7 @@ from picamera.array import PiRGBArray
 import RPi.GPIO as GPIO
 import cv2
 import time
+import numpy
 
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
@@ -30,24 +31,27 @@ STEP_SEQUENCE = [[1, 0, 0, 1],
                  [0, 0, 0, 1]]
 
 for i in range(3):
-    print("MOTOR " + i)
+    print(i)
     GPIO.setup(MOTOR_PINS[i], GPIO.OUT)
     GPIO.output(MOTOR_PINS[i], GPIO.LOW)
 
 lower_color_bound = numpy.array([14, 0, 0])
 upper_color_bound = numpy.array([30, 154, 154]) # my cat's coat color
 
+CAMERA_X_RES = 1920
+CAMERA_Y_RES = 1088
+
 motor_steps = 0
 
 def runMotor(degrees, direction): # direction: true is cw, false is ccw
-    for i in range(degrees / 360 * STEPS_PER_ROTATION):
+    for i in range(round(degrees / 360 * STEPS_PER_ROTATION)):
         for pin in range(len(MOTOR_PINS)):
             GPIO.output(MOTOR_PINS[pin], STEP_SEQUENCE[motor_steps % len(STEP_SEQUENCE)][pin])
 
         if direction:
-            motor_steps--
+            motor_steps -= 1
         else:
-            motor_steps++
+            motor_steps += 1
 
         time.sleep(STEP_TIME)
 
@@ -64,9 +68,9 @@ while True:
         
         try:
             with PiCamera() as cam:
-                cam.resolution = (1920, 1080) # set up camera
+                cam.resolution = (CAMERA_X_RES, CAMERA_Y_RES) # set up camera
                 cam.framerate = 30
-                feed = PiRGBArray(cam, size = (1920, 1080))
+                feed = PiRGBArray(cam, size = (CAMERA_X_RES, CAMERA_Y_RES))
                 time.sleep(1) # let sensor adjust exposure etc.
                 
                 for frame in cam.capture_continuous(feed, format = "bgr", use_video_port = True):
