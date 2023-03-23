@@ -58,9 +58,11 @@ def runMotor(degrees, direction): # direction: true is cw, false is ccw
         time.sleep(STEP_TIME)
 
 def openTray():
+    print("OPENING TRAY")
     runMotor(TRAY_EXTEND_DEGREES, False)
 
 def closeTray():
+    print("CLOSING TRAY")
     runMotor(TRAY_EXTEND_DEGREES, True)
 
 while True:
