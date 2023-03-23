@@ -6,18 +6,18 @@ import time
 import numpy
 
 GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BOARD)
+GPIO.setmode(GPIO.BCM)
 
 # PIN CONSTANTS
-LED_PIN = 3
-SWITCH_PIN = 7
+LED_PIN = 2
+SWITCH_PIN = 4
 
 GPIO.setup(LED_PIN, GPIO.OUT)
 GPIO.output(LED_PIN, GPIO.LOW)
 GPIO.setup(SWITCH_PIN, GPIO.IN)
 
 # MOTOR PHASES
-MOTOR_PINS = [27, 29, 31, 33]
+MOTOR_PINS = [0, 5, 6, 13] #[27, 29, 31, 33]
 TRAY_EXTEND_DEGREES = 360 * 6 # 4096 for full rotation
 STEPS_PER_ROTATION = 4096
 STEP_TIME = 0.001 # 0.002 # time to wait between each step
