@@ -13,6 +13,7 @@ LED_PIN = 3
 SWITCH_PIN = 7
 
 GPIO.setup(LED_PIN, GPIO.OUT)
+GPIO.output(LED_PIN, GPIO.LOW)
 GPIO.setup(SWITCH_PIN, GPIO.IN)
 
 # MOTOR PHASES
@@ -30,7 +31,7 @@ STEP_SEQUENCE = [[1, 0, 0, 1],
                  [0, 0, 1, 1],
                  [0, 0, 0, 1]]
 
-for i in range(len(STEP_SEQUENCE)):
+for i in range(len(MOTOR_PINS)):
     print(i)
     GPIO.setup(MOTOR_PINS[i], GPIO.OUT)
     GPIO.output(MOTOR_PINS[i], GPIO.LOW)
@@ -80,7 +81,7 @@ while True:
                     mask = cv2.inRange(hsv_image, lower_color_bound, upper_color_bound) # create a bit mask
 
                     # of what pixels fall within the color range
-                    if numpy.sum(mask) > 200000: # my cat detected! 500x400 square of her coat was found
+                    if numpy.sum(mask) > 10:#384000: # my cat detected! 500x400 square of her coat was found
                         # -- potentially disable light, might mess with their vision more -- #
                         openTray() # open the food tray
 
