@@ -9,7 +9,7 @@ GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 
 # PIN CONSTANTS
-LED_PIN = 2
+LED_PIN = 3
 SWITCH_PIN = 4
 
 GPIO.setup(LED_PIN, GPIO.OUT)
@@ -102,4 +102,4 @@ while True:
 
 
     GPIO.output(LED_PIN, GPIO.LOW)
-    time.sleep(0.5)
+    time.sleep(0.1)
