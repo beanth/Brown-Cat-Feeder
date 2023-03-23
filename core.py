@@ -6,7 +6,7 @@ import time
 import numpy
 
 GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BCM)
+GPIO.setmode(GPIO.BOARD)
 
 # PIN CONSTANTS
 LED_PIN = 3
