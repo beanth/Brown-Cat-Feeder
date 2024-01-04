@@ -18,7 +18,7 @@ GPIO.setup(SWITCH_PIN, GPIO.IN)
 
 # MOTOR PHASES
 MOTOR_PINS = [0, 5, 6, 13] #[27, 29, 31, 33]
-TRAY_EXTEND_DEGREES = 360 * 6 # 4096 for full rotation
+TRAY_EXTEND_DEGREES = 360 # 4096 for full rotation
 STEPS_PER_ROTATION = 4096
 STEP_TIME = 0.001 # 0.002 # time to wait between each step
 # if set too low, steps will be skipped
