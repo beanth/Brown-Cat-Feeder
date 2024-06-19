@@ -16,6 +16,10 @@ def main():
 		data = samples[0].tobytes()
 		res = Response(data)
 		res.headers["Content-Type"] = "image/jpeg"
+		res.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+		res.headers["Pragma"] = "no-cache"
+		res.headers["Expires"] = "0"
+		res.cache_control.max_age = 0
 		return res
 
 @app.route('/data', methods = ['GET'])
