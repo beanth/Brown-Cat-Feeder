@@ -13,7 +13,9 @@ def capture_loop(data):
 	
 	while data[2]:
 		time.sleep(1)
-		_, image_encoded = cv2.imencode('.jpg', cam.capture_array())
+		image = cam.capture_array()
+		image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+		_, image_encoded = cv2.imencode('.jpg', image)
 		data[0] = image_encoded
 		data[1].append([datetime.now(), 30])
 	
