@@ -7,10 +7,8 @@ from flask import Flask, jsonify, request, Response
 from capture import capture_loop
 from datetime import datetime
   
-# creating a Flask app 
 app = Flask(__name__)
-
-samples = [cv2.imencode('.jpg', cv2.imread('images/no-sample.jpg')), [], True]
+samples = [cv2.imencode('.jpg', cv2.imread('images/no-sample.jpg'))[1], [], True]
 
 @app.route('/', methods = ['GET'])
 def main():
@@ -20,10 +18,6 @@ def main():
 		res.headers["Content-Type"] = "image/jpeg"
 		return res
 
-# A simple function to calculate the square of a number 
-# the number to be squared is sent in the URL when we use GET 
-# on the terminal type: curl http://127.0.0.1:5000 / home / 10 
-# this returns 100 (square of 10) 
 @app.route('/data', methods = ['GET'])
 def fetch_data():
 	ret = jsonify(samples[1])
