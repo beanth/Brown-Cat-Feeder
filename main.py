@@ -30,7 +30,7 @@ def fetch_data():
 
 # driver function 
 if __name__ == '__main__': 
-	thread = threading.Thread(target=capture.capture_loop, args=(samples,))
+	thread = threading.Thread(target=capture_loop, args=(samples,))
 	thread.start()
 
 	app.run(debug=True, host="0.0.0.0", port=5010)

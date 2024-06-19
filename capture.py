@@ -10,7 +10,6 @@ def capture_loop(data):
 	# with PiCamera() as cam:
 	#data[1].append([datetime.now(), 13])
 	while True:
+		data[0] = image_encoded
+		data[1].append([datetime.now(), 30])
 		time.sleep(1)
-		if not obj[0]:
-			_, image_encoded = cv2.imencode('.jpg', cv2.imread('images/no-sample.jpg'))
-			data[0] = image_encoded
