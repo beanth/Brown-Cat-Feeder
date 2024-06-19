@@ -12,7 +12,7 @@ def capture_loop(data):
 	cam.configure(cam_config)
 	cam.start_preview(Preview.NULL)
 	cam.start()
-	while True:
+	while data[2]:
 		time.sleep(1)
 		_, image_encoded = cv2.imencode('.jpg', cam.capture_array())
 		data[0] = image_encoded
