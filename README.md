@@ -3,11 +3,10 @@
 ![Exploded View](images/exploded.png)
 
 
-Allows a Raspberry Pi to drive a motor which controls a food hopper.
+Allows a Raspberry Pi to drive a motor which controls a food hopper and analyze the amount of food remaining using OpenCV.
 
 ## How to install
-Run `pip install --upgrade pip setuptools wheel numpy` first, and then `apt-get install libhdf5-dev libatlas3-base libjasper-dev`. Finally, run `pip install -r requirements.txt` in root of repo.  
-You must enable Legacy Camera support using `raspi-config`.
+-todo-
 
 ## How it works
 -todo-
