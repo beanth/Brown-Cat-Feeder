@@ -5,6 +5,9 @@ import cv2
 import time
 import numpy
 
+_, image_encoded = cv2.imencode('.jpg', cv2.imread('images/no-sample.jpg'))
+samples = [[image_encoded, -1]]
+
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 
@@ -74,10 +77,10 @@ while True:
 			try:
 				cam.resolution = (CAMERA_X_RES, CAMERA_Y_RES) # set up camera
 				cam.framerate = 30
-				feed = PiRGBArray(cam, size = (CAMERA_X_RES, CAMERA_Y_RES))
+				raw_capture = PiRGBArray(cam, size = (CAMERA_X_RES, CAMERA_Y_RES))
 				time.sleep(1) # let sensor adjust exposure etc.
 				
-				for frame in cam.capture_continuous(feed, format = "bgr", use_video_port = True):
+				for frame in cam.capture_continuous(raw_capture, format = "bgr", use_video_port = True):
 					image = frame.array
 					hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV) # convert to HSV for use with inRange
 					mask = cv2.inRange(hsv_image, lower_color_bound, upper_color_bound) # create a bit mask
@@ -91,16 +94,16 @@ while True:
 							time.sleep(1)
 
 						GPIO.output(LED_PIN, GPIO.LOW)
-						feed.truncate(0)
+						# raw_capture.truncate(0)
 						closeTray() # close the food tray
 						break
 
 					# clear stream
-					feed.truncate(0)
-			finally:
-				cam.close()
+					raw_capture.truncate(0)
 			except:
 				print("CAMERA NOT CONNECTED PROPERLY/ENABLED")
+			finally:
+				cam.close()
 
 
 	GPIO.output(LED_PIN, GPIO.LOW)
