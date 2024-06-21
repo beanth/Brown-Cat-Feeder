@@ -20,7 +20,9 @@ def capture_loop(data):
 		image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
 		hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 		mask = cv2.inRange(hsv, lower_color_bound, upper_color_bound)
+		num_food = numpy.sum(mask)
 		result = cv2.bitwise_and(image, image, mask=mask)
+		result = cv2.putText(result, str(num_food), (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA, False)
 		_, image_encoded = cv2.imencode('.jpg', result)
 		data[0] = image_encoded
 		data[1].append([datetime.now(), 30])
