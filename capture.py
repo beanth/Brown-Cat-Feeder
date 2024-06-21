@@ -4,8 +4,8 @@ import numpy
 from picamera2 import Picamera2, Preview
 from datetime import datetime
 
-lower_color_bound = (5, 50, 50)
-upper_color_bound = (15, 255, 255)
+lower_color_bound = (0, 45, 83)
+upper_color_bound = (30, 187, 255)
 
 def capture_loop(data):
 	cam = Picamera2()
@@ -17,9 +17,11 @@ def capture_loop(data):
 	while data[2]:
 		time.sleep(1)
 		image = cam.capture_array()
-		image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-		mask = cv2.inRange(image, lower_color_bound, upper_color_bound)
-		_, image_encoded = cv2.imencode('.jpg', image)
+		image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
+		hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+		mask = cv2.inRange(hsv, lower_color_bound, upper_color_bound)
+		result = cv2.bitwise_and(image, image, mask=mask)
+		_, image_encoded = cv2.imencode('.jpg', result)
 		data[0] = image_encoded
 		data[1].append([datetime.now(), 30])
 	
