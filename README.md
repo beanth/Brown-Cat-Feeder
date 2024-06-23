@@ -1,8 +1,7 @@
 # Computer-Vision-Cat-Feeder
-<img src="images/cv-example.jpg" width="75%">
 <img src="images/front.png" width="35%"><img src="images/exploded.png" width="65%">
 
-
+<img src="images/cv-example.jpg" width="50%">
 Allows a Raspberry Pi to drive a motor which controls a food hopper to refill food. Analyzes the amount of food remaining in the food bowl using OpenCV and Picamera2. Hosts an API with Flask to fetch the data samples.
 
 ## How to install
