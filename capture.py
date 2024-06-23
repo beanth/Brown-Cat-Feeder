@@ -4,15 +4,23 @@ import numpy
 from picamera2 import Picamera2, Preview
 from datetime import datetime
 
-lower_color_bound = (0, 45, 83)
-upper_color_bound = (30, 187, 255)
+lower_color_bound = (0, 18, 98)
+upper_color_bound = (31, 214, 212)
 
 def capture_loop(data):
 	cam = Picamera2()
 	cam_config = cam.create_preview_configuration()
 	cam.configure(cam_config)
+	#{'AeExposureMode': (0, 3, 0), 'AeMeteringMode': (0, 3, 0), 'AwbMode': (0, 7, 0), 'AeFlickerMode': (0, 1, 0), 'AnalogueGain': (1.0, 63.9375, None), 'FrameDurationLimits': (16971, 1103354, None), 'AeConstraintMode': (0, 3, 0), 'NoiseReductionMode': (0, 4, 0), 'Sharpness': (0.0, 16.0, 1.0), 'AwbEnable': (False, True, None), 'StatsOutputEnable': (False, True, None), 'Contrast': (0.0, 32.0, 1.0), 'Saturation': (0.0, 32.0, 1.0), 'Brightness': (-1.0, 1.0, 0.0), 'ColourGains': (0.0, 32.0, None), 'AeFlickerPeriod': (100, 1000000, None), 'HdrMode': (0, 4, 0), 'ExposureValue': (-8.0, 8.0, 0.0), 'ScalerCrop': ((16, 0, 256, 256), (16, 0, 2560, 1920), (16, 0, 2560, 1920)), 'ExposureTime': (134, 0, None), 'AeEnable': (False, True, None)}
+	#cam.set_controls({"AwbEnable": True, 'AwbMode': 3, 'AeExposureMode': 3})
 	cam.start_preview(Preview.NULL)
 	cam.start()
+	
+	with cam.controls as ctrl:
+		ctrl.AwbEnable = True
+		ctrl.AwbMode = 4
+		ctrl.AnalogueGain = 14.0
+		ctrl.AeEnable = True
 	
 	while data[2]:
 		time.sleep(1)
