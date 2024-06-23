@@ -1,4 +1,5 @@
 # Computer-Vision-Cat-Feeder
+<img src="images/cv-example.jpg" width="75%">
 <img src="images/front.png" width="35%"><img src="images/exploded.png" width="65%">
 
 
