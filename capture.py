@@ -2,7 +2,7 @@ import cv2
 import time
 import numpy
 from picamera2 import Picamera2, Preview
-from datetime import datetime
+from time import time
 
 lower_color_bound = (0, 18, 98)
 upper_color_bound = (31, 214, 212)
@@ -43,6 +43,6 @@ def capture_loop(data):
 		result = cv2.putText(result, str(num_food), (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA, False)
 		_, image_encoded = cv2.imencode('.jpg', result)
 		data[0] = image_encoded
-		data[1].append([datetime.now(), int(num_food)])
+		data[1].append([time(), int(num_food)])
 	
 	cam.stop()
