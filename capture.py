@@ -2,10 +2,9 @@ import cv2
 import time
 import numpy
 from picamera2 import Picamera2, Preview
-from time import time
 
-lower_color_bound = (0, 18, 98)
-upper_color_bound = (31, 214, 212)
+lower_color_bound = (0, 15, 71)
+upper_color_bound = (36, 220, 235)
 
 def capture_loop(data):
 	cam = Picamera2()
@@ -33,16 +32,21 @@ def capture_loop(data):
 		########################
 		######### TODO ######### MAKE MASK SIZE AND POSITION CUSTOMIZABLE
 		########################
-		for y in range(90): # cut off some of the noise
-			for x in range(width):
-				mask[y][x] = 0
-			if y > 100:
-				break
+		#for y in range(90): # cut off some of the noise
+		#	for x in range(width):
+		#		mask[y][x] = 0
+		#	if y > 100:
+		#		break
 		num_food = numpy.sum(mask)
 		result = cv2.bitwise_and(image, image, mask=mask)
-		result = cv2.putText(result, str(num_food), (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA, False)
+		color = (255, 255, 255)
+		if num_food < 6000000:
+			color = (50, 50, 255)
+		result = cv2.putText(result, str(num_food), (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, color, 2, cv2.LINE_AA, False)
 		_, image_encoded = cv2.imencode('.jpg', result)
 		data[0] = image_encoded
-		data[1].append([time(), int(num_food)])
+		
+		if num_food >= 6000000:
+			data[1].append([time.time(), int(num_food)])
 	
 	cam.stop()
