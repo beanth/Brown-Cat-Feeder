@@ -45,8 +45,8 @@ def capture_loop(data):
 		result = cv2.putText(result, str(num_food), (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, color, 2, cv2.LINE_AA, False)
 		_, image_encoded = cv2.imencode('.jpg', result)
 		data[0] = image_encoded
-		
+
 		if num_food >= 6000000:
-			data[1].append([time.time(), int(num_food)])
+			data[1].append([time.time() * 1000, int(num_food)])
 	
 	cam.stop()
