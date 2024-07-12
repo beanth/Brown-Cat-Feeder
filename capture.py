@@ -3,8 +3,14 @@ import time
 import numpy
 from picamera2 import Picamera2, Preview
 
-lower_color_bound = (0, 15, 71)
-upper_color_bound = (36, 220, 235)
+lower_color_bound = (1, 59, 44)
+upper_color_bound = (31, 237, 139)
+
+vid_width = 640
+vid_height = 480
+
+circle_mask = numpy.zeros([480, 640], dtype="uint8")
+cv2.circle(circle_mask, (300, 240), 290, 1, -1)
 
 def capture_loop(data):
 	cam = Picamera2()
@@ -27,6 +33,7 @@ def capture_loop(data):
 		image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
 		hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 		mask = cv2.inRange(hsv, lower_color_bound, upper_color_bound)
+		mask = cv2.bitwise_and(mask, mask, mask=circle_mask)
 		height = image.shape[0]
 		width = image.shape[1]
 		########################
