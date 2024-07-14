@@ -8,6 +8,8 @@ from capture import capture_loop
 from datetime import datetime
   
 app = Flask(__name__)
+app.logger.setLevel(logging.ERROR)
+
 samples = [cv2.imencode('.jpg', cv2.imread('images/no-sample.jpg'))[1], [], True]
 
 def gen_frame():
