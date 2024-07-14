@@ -4,9 +4,19 @@ import threading
 import signal
 import logging
 import sys
+import RPi.GPIO as GPIO
 from flask import Flask, jsonify, request, Response
 from capture import capture_loop
 from datetime import datetime
+
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BCM)
+
+# PIN CONSTANTS
+LED_PIN = 3
+
+GPIO.setup(LED_PIN, GPIO.OUT)
+GPIO.output(LED_PIN, GPIO.HIGH)
   
 app = Flask(__name__)
 app.logger.setLevel(logging.ERROR)
